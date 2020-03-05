@@ -13,7 +13,7 @@
     "test:mimc": "node --wasm-interpret-all index.js tests/tests-mimc.yml",
     "bench:liftoff": "node --liftoff --no-wasm-tier-up index.js",
     "bench:turbofan": "node index.js",
-    "test:turbofan:mimc": "node index.js tests/tests-mimc-no-bignums.yml",
+    "bench:interpreter": "node --wasm-interpret-all index.js",
     "build": "npx asc assembly/mixer/main.ts -b assembly/mixer/out/main.wasm -t assembly/mixer/out/main.wat --validate && cd assembly/mixer && gulp"
   },
   "repository": {

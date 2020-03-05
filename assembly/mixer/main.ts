@@ -50,6 +50,7 @@ function append_leaf(input_data: usize, p_prestate_root: usize, out_root: usize,
     let p_last_witness = p_mixer_root + SIZE_F;
     let p_merkle_proof = p_last_witness + SIZE_F;
     let p_merkle_root = p_merkle_proof;
+    // TODO: a diagram of the memory layout here??
 
     merkle_proof_init(p_merkle_proof);
 
