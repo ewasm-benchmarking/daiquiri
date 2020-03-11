@@ -326,6 +326,10 @@ function main() {
 
   for (var i = 0; i < testCases.length; i++) {
     var testCase = testCases[i];
+
+    let start = process.hrtime()
+    let t_end_start, t_begin_exec, t_end_exec
+
     var wasmFile = fs.readFileSync(testCase.script);
     var wasmModule = new WebAssembly.Module(wasmFile);
     let prestate = testCase.preStateRoot;
@@ -339,16 +343,15 @@ function main() {
         );
 
         setMemory(instance.exports.memory);
-        var t = process.hrtime();
+
+        t_end_start = process.hrtime(start)
+        t_begin_exec = process.hrtime()
 
         instance.exports.main();
-        t = process.hrtime(t);
-        console.log(
-          "benchmark took %d seconds and %d nanoseconds (%dms)",
-          t[0],
-          t[1],
-          t[1] / 1000000
-        );
+
+        t_end_exec = process.hrtime(t_begin_exec)
+        console.log('benchmark startup took %d seconds and %d nanoseconds (%dms)', t_end_start[0], t_end_start[1], t_end_start[1] / 1000000)
+        console.log('benchmark execution took %d seconds and %d nanoseconds (%dms)', t_end_exec[0], t_end_exec[1], t_end_exec[1] / 1000000)
     }
     assert(
       testCase.postStateRoot.equals(res),
